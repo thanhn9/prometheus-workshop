@@ -1,0 +1,98 @@
+version: '3.7'
+
+services:
+  go-service:
+    image: go-service-x:latest
+    container_name: go-service
+    networks:
+      - public
+    build:
+      context: services/go-service/.
+    ports:
+      - "8080:80"
+
+  go-service1:
+    image: go-service-x:latest
+    container_name: go-service1
+    networks:
+      - public
+    ports:
+      - "8083:80"
+
+## added new go-service
+  go-service2:
+    image: go-service-x:latest
+    container_name: go-service2
+    networks:
+      - public
+    ports:
+      - "9083:80"
+
+  python-service:
+    image: python-service:latest
+    container_name: python-service
+    networks:
+      - public
+    build:
+      context: services/python-service/.
+    ports:
+      - "8081:80"
+
+  dotnet-service:
+    image: dotnet-service:latest
+    container_name: dotnet-service
+    networks:
+      - public
+    build:
+      context: services/dotnet-service/.
+    ports:
+      - "8082:80"
+
+## added new dotnet service
+  dotnet-service1:
+    image: dotnet-service:latest
+    container_name: dotnet-service1
+    networks:
+      - public
+    build:
+      context: services/dotnet-service/.
+    ports:
+      - "9082:80"
+
+  http-simulator:
+    image: http-simulator:latest
+    container_name: http-simulator
+    networks:
+      - public
+    build:
+      context: services/http-simulator/.
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    networks:
+      - public
+    ports:
+      - "9090:9090"
+    volumes:
+      - "./configs/prometheus.yml:/etc/prometheus/prometheus.yml"
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    networks:
+      - public
+    ports:
+      - "3000:3000"
+    volumes:
+      - "grafana-storage:/var/lib/grafana"
+      - "./configs/grafana.ini:/etc/grafana/grafana.ini"
+
+networks:
+  public: {}
+
+volumes:
+  grafana-storage:
+
+
+

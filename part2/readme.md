@@ -89,7 +89,7 @@ func pong(w http.ResponseWriter, r *http.Request) {
 With that code added, build a new image of the `go-service` and run
 `docker-compose up` again, this should give extra metrics paths, but before
 checking it would be a good idea to generate some traffic, by doing `GET`
-requests on `localhost:8081/v1/ping`.
+requests on `localhost:8080/v1/ping`.
 
 After a couple of hits, look at the metrics of the go service by navigating to
 [localhost:8080/metrics](localhost:8080/metrics), and search for the new
